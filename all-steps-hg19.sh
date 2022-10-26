@@ -169,6 +169,27 @@ do
     echo "### REMAPPING"
     sh step-04-remapping.sh $PARFILE $TRIMMINGOUT_1 $TRIMMINGOUT_2 05-remapping-hg19
 
+    while read helper5
+    do
+          MAPPINGOUT=$helper5
+    done < env_var5.txt
+
+
+    # HTSEQ COUNTS
+    echo ""
+    echo ""
+    echo "### HTSEQ"
+    sh step-04-htseq.sh $PARFILE $MAPPINGOUT 05-htseq-hg19
+
+    if [ $CLEANUP != 0 ];
+       then
+       rm -f env_var1.txt
+       rm -f env_var2.txt
+       rm -f env_var3.txt
+       rm -f env_var4.txt
+       rm -f env_var5.txt
+    fi
+
 done < $INPUTFILE_1 3<$INPUTFILE_2 >> $LOGFILE 2>&1        
 
 
