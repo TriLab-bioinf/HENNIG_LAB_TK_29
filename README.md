@@ -1,6 +1,6 @@
 # HENNIG_LAB_TK_29
 
-## ADAPT THE INPUT FILE
+## Adapt the input files to point to the correct fastq files
 #### be careful, that you have the same order!!!
 ```
 input_1.txt
@@ -12,7 +12,7 @@ Change the GENOME variable so it points to the folder with the STAR genome DB
 Adjust the OVERHANG variable to the read length used when building the database
 (See genomeParameters.txt file in genome DB directory)   
 
-## ADAPT THE run.swarm FILE
+## Adapt the run.swarm file
 
 #### change the date of the log file within run.swarm 
 ```
