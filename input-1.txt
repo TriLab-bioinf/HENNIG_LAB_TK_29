@@ -1,0 +1,2 @@
+/data/lorenziha/Lothar_Hennighausen/TK_29/2way_test/00-raw/BNT_Aus_1_1st/BNT_Aus_1_1st_R1_001.fastq.gz
+/data/lorenziha/Lothar_Hennighausen/TK_29/2way_test/00-raw/BNT_Aus_1_2nd/BNT_Aus_1_2nd_R1_001.fastq.gz

@@ -1,0 +1,31 @@
+# fastqc
+FASTQC=fastqc
+
+#fastx-trimmer
+READ=PE
+THREADS=36
+ADAPTER=ILLUMINACLIP:/usr/local/apps/trimmomatic/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:12
+LEADING=LEADING:3
+TRAILING=TRAILING:3
+SLIDINGWINDOW=SLIDINGWINDOW:4:20
+MINLEN=MINLEN:20
+HEADCROP=HEADCROP:3
+
+CLEANUP=0
+
+
+# star
+STARTHR=36
+GENOME=/gpfs/gsfs12/users/lorenziha/Lothar_Hennighausen/TK_29/2way_test/hg19
+OVERHANG=150
+
+# samtools
+SAMTOOLS=samtools
+
+#htseq
+POS=pos
+ATTR=gene_id
+FEAT=exon
+FORMAT=bam
+STRAND=no
+GTF=/fdb/STAR/iGenomes/Homo_sapiens/UCSC/hg19/genes.gtf
