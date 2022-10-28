@@ -144,9 +144,9 @@ done < $INPUTFILE_1 3<$INPUTFILE_2 > $LOGFILE 2>&1
 # Unify splice junctions across all samples
 echo ""
 echo ""
-echo "### Collecting new splice sites in ALL.SJ.out.tab"
+echo "### Collecting new splice sites in *SJ.out.tab files"
 newsjdb=$(find ./04-mapping-hg19 -type f -name "*SJ.out.tab"|perl -e 'while(<>){chomp;s/^\.\///;push @x, $_};print join(" ",@x)')
-export $newsjdb
+export newsjdb
 
 # analyse each file from the input list
 while IFS= read -r line1 && IFS= read -r line2 <&3;
