@@ -60,7 +60,7 @@ cd $WP && STAR \
 	--outReadsUnmapped Fastx \
 	--runThreadN $STARTHR \
     --readFilesCommand zcat \
-    --sjdbFileChrStartEnd ${AD}/ALL.SJ.out.tab \
+    --sjdbFileChrStartEnd ${AD}/${newsjdb} \
 	--outFileNamePrefix $STAR_OUT_B  > $BASEN"_star_$$.log" 2>&1
 
 # 2-pass mapping
