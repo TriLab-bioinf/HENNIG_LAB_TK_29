@@ -6,20 +6,21 @@
 PARFILE=$1
 source ./$PARFILE
 
-# fastq
-FASTQF=$2
+if [ "$STEP1" = true ]; then
+    # fastq
+    FASTQF=$2
 
-# output directory
-QCDIR=$3
-mkdir -p -m 777 $QCDIR
+    # output directory
+    QCDIR=$3
+    mkdir -p -m 777 $QCDIR
 
 
-FASTQC=fastqc
+    FASTQC=fastqc
 
-BASEN=`basename $FASTQF .fastq`
-QCOUT=$QCDIR"/"$BASEN
+    BASEN=`basename $FASTQF .fastq`
+    QCOUT=$QCDIR"/"$BASEN
 
-mkdir $QCOUT
-$FASTQC -o $QCOUT -a adapters.txt $FASTQF 
-
+    mkdir $QCOUT
+    $FASTQC -o $QCOUT -a adapters.txt $FASTQF 
+fi
 

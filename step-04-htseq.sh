@@ -30,9 +30,9 @@ WD=`pwd`
 FASTQF=`basename $MAPREADS`
 BASEN=${FASTQF%.*}
 
+if [ "$STEP5" = true ]; then
+    cd $MAPDIR
 
-cd $MAPDIR
-
-
-htseq-count -i $ATTR -r $POS -t $FEAT -f $FORMAT -s $STRAND $MAPREADS $GTF >  $BASEN".txt"
+    htseq-count -i $ATTR -r $POS -t $FEAT -f $FORMAT -s $STRAND $MAPREADS $GTF >  $BASEN".txt"
+fi
 

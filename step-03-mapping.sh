@@ -51,27 +51,29 @@ WP=`pwd`
 MAPPINGOUT=$WP"/"$STAR_OUT_SORT".bam"
 echo $MAPPINGOUT > $AD/env_var5.txt
 
-cd $WP && STAR \
-    --genomeDir ${GENOME} \ #/home/lorenziha/data/Lothar_Hennighausen/TK_29/2way_test/hg19/ \
-	--sjdbOverhang ${OVERHANG} \
-	--readFilesIn $INPUT_1 $INPUT_2 \
-	--outSAMtype BAM SortedByCoordinate \
-	--outFilterMultimapNmax 20 \
-	--outReadsUnmapped Fastx \
-	--runThreadN $STARTHR \
-    --readFilesCommand zcat \
-	--outFileNamePrefix $STAR_OUT_B  > $BASEN"_star_$$.log" 2>&1
+if [ "$STEP3" =  true ]; then
+    cd $WP && STAR \
+        --genomeDir ${GENOME} \ #/home/lorenziha/data/Lothar_Hennighausen/TK_29/2way_test/hg19/ \
+	    --sjdbOverhang ${OVERHANG} \
+	    --readFilesIn $INPUT_1 $INPUT_2 \
+	    --outSAMtype BAM SortedByCoordinate \
+	    --outFilterMultimapNmax 20 \
+	    --outReadsUnmapped Fastx \
+	    --runThreadN $STARTHR \
+        --readFilesCommand zcat \
+	    --outFileNamePrefix $STAR_OUT_B  > $BASEN"_star_$$.log" 2>&1
 
 # 2-pass mapping
 #--sjdbFileChrStartEnd 
 #--twopassMode 
 
 
+    ln -s $STAR_OUT_B"Aligned.sortedByCoord.out.bam" $STAR_OUT_SORT".bam"
+    #java -Xmx40g -jar $PICARDJARPATH/picard.jar SortSam INPUT=$STAR_OUT_B"Aligned.sortedByCoord.out.bam" \
+	#    		OUTPUT=$STAR_OUT_SORT".bam" SORT_ORDER=coordinate
 
-java -Xmx40g -jar $PICARDJARPATH/picard.jar SortSam INPUT=$STAR_OUT_B"Aligned.sortedByCoord.out.bam" \
-			OUTPUT=$STAR_OUT_SORT".bam" SORT_ORDER=coordinate
-
-$SAMTOOLS index $STAR_OUT_SORT".bam"
+    $SAMTOOLS index $STAR_OUT_SORT".bam"
+fi
 
 if [ $CLEANUP != 0 ]; then
 	rm -f $FASTQF

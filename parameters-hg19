@@ -1,3 +1,10 @@
+# Workflow control
+STEP1=true
+STEP2=true
+STEP3=true
+STEP4=true
+STEP5=true
+
 # fastqc
 FASTQC=fastqc
 

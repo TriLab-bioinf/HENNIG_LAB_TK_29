@@ -144,7 +144,7 @@ done < $INPUTFILE_1 3<$INPUTFILE_2 > $LOGFILE 2>&1
 # Unify splice junctions across all samples
 echo ""
 echo ""
-echo "### Collecting new splice sites in *SJ.out.tab files"
+echo "### Collecting new splice sites from 04-mapping-hg19/*SJ.out.tab files"
 newsjdb=$(find ${AD}/04-mapping-hg19 -type f -name "*SJ.out.tab"|perl -e 'while(<>){chomp;push @x, $_};print join(" ",@x)')
 export newsjdb
 
@@ -162,8 +162,6 @@ do
     TRIMMINGOUT_1=${AD}/04-mapping-hg19/clean-${FASTQ_1}-paired.fastq/clean-${FASTQ_1}-paired.fastq.gz
     TRIMMINGOUT_2=${AD}/04-mapping-hg19/clean-${FASTQ_1}-paired.fastq/clean-${FASTQ_2}-paired.fastq.gz
 
-    echo CMD = sh step-04-remapping.sh $PARFILE $TRIMMINGOUT_1 $TRIMMINGOUT_2 05-remapping-hg19
-    
     # MAPPING
     echo ""
     echo ""
