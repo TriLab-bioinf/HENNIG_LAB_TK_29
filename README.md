@@ -12,11 +12,12 @@ File *input_2.txt* should contain the full path to Reverse read fastq files
 Paths pointing to Fwd and Rev fastq files for a given sample should be in 
 the same relative position in the input files.  
 
-## Modify the parameters-hg19 file if necessary
+## Modify the parameters-hg19 file, if necessary
 
 Change the *GENOME* variable so it points to the folder with the STAR genome DB
 Adjust the *OVERHANG* variable to the read length used when building the database
 (See genomeParameters.txt file in genome DB directory)   
+set STEP1-5 variables to false if you want to skip one or more steps. Note: later steps depend on initial step results. Therefore, use these workflow control switches only to avoid rerunning some initial steps that have been already run or for testing purposes.     
 
 ## Adjust the run.swarm file if necessary
 
