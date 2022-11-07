@@ -13,6 +13,9 @@ FULLFASTQF_2=$3
 # output directory
 MAPDIR=$4
 
+# new sjdb database
+NEWSJDB=$5
+
 if [ ! -d $MAPDIR ]; then
     mkdir -p -m 777 $MAPDIR
 fi
@@ -61,7 +64,7 @@ if [ "$STEP4" = true ]; then
 	    --outReadsUnmapped Fastx \
 	    --runThreadN $STARTHR \
         --readFilesCommand zcat \
-        --sjdbFileChrStartEnd ${newsjdb} \
+        --sjdbFileChrStartEnd ${NEWSJDB} \
 	    --outFileNamePrefix $STAR_OUT_B  > $BASEN"_star_$$.log" 2>&1
 
     # 2-pass mapping

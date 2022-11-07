@@ -144,9 +144,10 @@ done < $INPUTFILE_1 3<$INPUTFILE_2 > $LOGFILE 2>&1
 # Unify splice junctions across all samples
 echo ""
 echo ""
-echo "### Collecting new splice sites from 04-mapping-hg19/*SJ.out.tab files"
-newsjdb=$(find ${AD}/04-mapping-hg19 -type f -name "*SJ.out.tab"|perl -e 'while(<>){chomp;push @x, $_};print join(" ",@x)')
-export newsjdb
+echo "### Collecting new splice sites in ALL.SJ.out.tab"
+
+NEWSJDB=${AD}/ALL.SJ.out.tab
+find ./04-mapping-hg19 -type f -name "*SJ.out.tab" -exec cat {} \; |sort |uniq |awk -F "\\t" '{{if ($5>0 && $6==1) {{print}}}}'|cut -f1-4|sort|uniq > ${NEWSJDB}
 
 # analyse each file from the input list
 while IFS= read -r line1 && IFS= read -r line2 <&3;
@@ -162,11 +163,13 @@ do
     TRIMMINGOUT_1=${AD}/04-mapping-hg19/clean-${FASTQ_1}-paired.fastq/clean-${FASTQ_1}-paired.fastq.gz
     TRIMMINGOUT_2=${AD}/04-mapping-hg19/clean-${FASTQ_1}-paired.fastq/clean-${FASTQ_2}-paired.fastq.gz
 
-    # MAPPING
+    echo CMD = sh step-04-remapping.sh $PARFILE $TRIMMINGOUT_1 $TRIMMINGOUT_2 05-remapping-hg19
+    
+    # REMAPPING
     echo ""
     echo ""
     echo "### REMAPPING"
-    sh step-04-remapping.sh $PARFILE $TRIMMINGOUT_1 $TRIMMINGOUT_2 05-remapping-hg19
+    sh step-04-remapping.sh $PARFILE $TRIMMINGOUT_1 $TRIMMINGOUT_2 05-remapping-hg19 ${NEWSJDB}
 
     while read helper5
     do
@@ -178,7 +181,7 @@ do
     echo ""
     echo ""
     echo "### HTSEQ"
-    sh step-04-htseq.sh $PARFILE $MAPPINGOUT 05-htseq-hg19
+    sh step-05-htseq.sh $PARFILE $MAPPINGOUT 06-htseq-hg19
 
     if [ $CLEANUP != 0 ];
        then
