@@ -31,8 +31,8 @@ BASEN_2=${FASTQF_2%.*}
 mkdir -p -m 777 $MAPDIR"/"$BASEN_1
 
 # mk link
-ln -s "../../"$FULLFASTQF_1 $MAPDIR"/"$BASEN_1"/"${FASTQF_1}
-ln -s "../../"$FULLFASTQF_2 $MAPDIR"/"$BASEN_1"/"${FASTQF_2}
+ln -fs "../../"$FULLFASTQF_1 $MAPDIR"/"$BASEN_1"/"${FASTQF_1}
+ln -fs "../../"$FULLFASTQF_2 $MAPDIR"/"$BASEN_1"/"${FASTQF_2}
 
 cd $MAPDIR"/"$BASEN_1
 echo $MAPDIR"/"$BASEN_1
@@ -68,7 +68,7 @@ if [ "$STEP3" =  true ]; then
 #--twopassMode 
 
 
-    ln -s $STAR_OUT_B"Aligned.sortedByCoord.out.bam" $STAR_OUT_SORT".bam"
+    ln -fs $STAR_OUT_B"Aligned.sortedByCoord.out.bam" $STAR_OUT_SORT".bam"
     #java -Xmx40g -jar $PICARDJARPATH/picard.jar SortSam INPUT=$STAR_OUT_B"Aligned.sortedByCoord.out.bam" \
 	#    		OUTPUT=$STAR_OUT_SORT".bam" SORT_ORDER=coordinate
 
